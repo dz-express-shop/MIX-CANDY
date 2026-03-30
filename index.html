@@ -8,253 +8,246 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Premium Fonts -->
+    <!-- Polices Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Lalezar&display=swap" rel="stylesheet">
     
-    <style>
-        :root { 
-            --c-pink: #ff1493; 
-            --c-gold: #ffd700;
-            --bg-dark: #0a0508; 
-            --glass: rgba(25, 15, 20, 0.85);
-        }
-        body { 
-            font-family: 'Almarai', sans-serif; 
-            background-color: var(--bg-dark); 
-            color: #ffffff; 
-            overflow-x: hidden; 
-            scroll-behavior: smooth; 
-            padding-bottom: 90px; 
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 20, 147, 0.1) 0%, transparent 40%),
-                              radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.08) 0%, transparent 40%);
-        }
-        .font-candy { font-family: 'Lalezar', system-ui; }
-        
-        /* Glassmorphism */
-        .glass-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
-        
-        /* Offer Cards Styling */
-        .display-card { border: 2px solid rgba(255,255,255,0.08); border-radius: 24px; overflow: hidden; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
-        .display-card:hover { transform: translateY(-8px); border-color: var(--c-pink); box-shadow: 0 15px 30px rgba(255, 20, 147, 0.2); }
-        .offer-img-wrapper { height: 220px; width: 100%; overflow: hidden; background: #000; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .offer-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
-        .display-card:hover .offer-img-wrapper img { transform: scale(1.08); }
-        
-        /* VIP Card Highlight */
-        .active-vip { border: 2px solid var(--c-gold); background: linear-gradient(180deg, rgba(255,215,0,0.05) 0%, rgba(0,0,0,0.7) 100%); transform: scale(1.03); }
-        .active-vip .vip-badge { background: linear-gradient(90deg, #ffd700, #ff8c00); color: #000; font-weight: 900; text-transform: uppercase; font-size: 11px; padding: 6px 0; width: 100%; text-align: center; }
+    <!-- Scripts de Suivi (Pixels) -->
+    <!-- Meta Pixel - Version Corrigée -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '880279101448547'); 
+        fbq('track', 'PageView');
+    </script>
+    
+    <!-- TikTok Pixel - Version Corrigée -->
+    <script>
+        !function (w, d, t) {
+            w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+            ttq.load('D691NORC77U6HVGGO320');
+            ttq.page();
+        }(window, document, 'ttq');
+    </script>
 
-        /* Custom Checkout Radio Selectors */
-        .radio-offer { display: block; cursor: pointer; margin-bottom: 15px; }
-        .radio-offer input { position: absolute; opacity: 0; }
-        .radio-box { border: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; }
-        .radio-offer:hover .radio-box { border-color: rgba(255, 20, 147, 0.4); }
-        .radio-offer input:checked ~ .radio-box { border-color: var(--c-pink); background: rgba(255, 20, 147, 0.08); box-shadow: 0 0 20px rgba(255, 20, 147, 0.1); }
-        .radio-offer.vip input:checked ~ .radio-box { border-color: var(--c-gold); background: rgba(255, 215, 0, 0.05); box-shadow: 0 0 25px rgba(255, 215, 0, 0.15); }
+    <style>
+        :root { --c-pink: #ff1493; --c-gold: #ffd700; --bg-dark: #0a0508; --glass: rgba(25, 10, 20, 0.85); }
+        body { font-family: 'Almarai', sans-serif; background-color: var(--bg-dark); color: #ffffff; overflow-x: hidden; scroll-behavior: smooth; background-image: radial-gradient(circle at 10% 20%, rgba(255, 20, 147, 0.1) 0%, transparent 40%); }
+        .font-candy { font-family: 'Lalezar', system-ui; }
+        .glass-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
         
-        .radio-circle { width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); flex-shrink: 0; margin-right: 15px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .display-card { border: 2px solid rgba(255,255,255,0.08); border-radius: 24px; overflow: hidden; background: rgba(0,0,0,0.5); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; display: flex; flex-direction: column; height: 100%; }
+        .display-card:hover { transform: translateY(-8px); border-color: var(--c-pink); }
+        .offer-img-wrapper { height: 220px; width: 100%; overflow: hidden; background: #111; }
+        .offer-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .display-card:hover .offer-img-wrapper img { transform: scale(1.1); }
+        
+        /* Mise en avant de l'Offre 3 (VIP) */
+        .vip-highlight { 
+            border: 3px solid var(--c-gold); 
+            box-shadow: 0 0 30px rgba(255,215,0,0.3); 
+            background: linear-gradient(180deg, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0.9) 100%); 
+            position: relative;
+        }
+        .vip-badge-float {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--c-gold);
+            color: #000;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            z-index: 20;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Styles de formulaire */
+        .radio-box { border: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; width: 100%; cursor: pointer; }
+        .radio-offer input { position: absolute; opacity: 0; }
+        .radio-offer input:checked ~ .radio-box { border-color: var(--c-pink); background: rgba(255, 20, 147, 0.1); }
+        .radio-offer.vip-choice input:checked ~ .radio-box { border-color: var(--c-gold); box-shadow: 0 0 20px rgba(255,215,0,0.15); }
+        
+        .radio-circle { width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); flex-shrink: 0; margin-right: 15px; display: flex; align-items: center; justify-content: center; }
         .radio-offer input:checked ~ .radio-box .radio-circle { background: var(--c-pink); border-color: var(--c-pink); }
-        .radio-offer.vip input:checked ~ .radio-box .radio-circle { background: var(--c-gold); border-color: var(--c-gold); }
+        .radio-offer.vip-choice input:checked ~ .radio-box .radio-circle { background: var(--c-gold); border-color: var(--c-gold); }
         .radio-offer input:checked ~ .radio-box .radio-circle::after { content: ''; width: 10px; height: 10px; background: white; border-radius: 50%; }
 
-        /* Scarcity Progress Bar */
-        .progress-bar { height: 8px; background: #222; border-radius: 4px; overflow: hidden; }
-        .progress-fill { width: 89%; height: 100%; background: linear-gradient(90deg, #ff1493, #ffd700); animation: pulse-bar 2s infinite; }
-        @keyframes pulse-bar { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
-
-        /* Buttons */
-        .btn-buy { background: linear-gradient(135deg, #ff1493, #8a2be2); box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5); transition: all 0.3s; }
-        .btn-buy:active { transform: scale(0.96); }
+        .btn-buy { background: linear-gradient(135deg, #ff1493, #8a2be2); box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
         
-        /* Shake Animation for Errors */
-        @keyframes shake { 0%, 100% {transform: translateX(0);} 20% {transform: translateX(-8px);} 40% {transform: translateX(8px);} 60% {transform: translateX(-5px);} 80% {transform: translateX(5px);} }
         .shake-error { animation: shake 0.5s ease-in-out; border-color: #ef4444 !important; }
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-5px);} 75% {transform: translateX(5px);} }
 
-        /* Notifications */
-        .push-noti { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-150%); background: rgba(15, 10, 15, 0.98); backdrop-filter: blur(10px); border-radius: 20px; padding: 12px 20px; width: 90%; max-w: 360px; border: 1px solid var(--c-pink); z-index: 1000; transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+        .push-noti { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-150%); background: rgba(15, 10, 15, 0.98); border-radius: 20px; padding: 12px 20px; width: 92%; max-w: 380px; border: 1px solid var(--c-pink); z-index: 1000; transition: 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
         .push-noti.show { transform: translateX(-50%) translateY(0); }
-
-        /* Mobile Typography Adjustments */
-        @media (max-width: 640px) {
-            h1 { font-size: 2.5rem !important; }
-            .display-card { margin-bottom: 10px; }
-        }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body class="antialiased selection:bg-pink-500 selection:text-white">
+<body>
 
-    <!-- REAL-TIME SALES NOTIFICATION -->
-    <div id="push-noti" class="push-noti flex items-center gap-4">
-        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 to-yellow-500 flex items-center justify-center text-2xl shadow-inner">🍬</div>
+    <!-- Notifications d'achat en direct -->
+    <div id="push-noti" class="push-noti flex items-center gap-4 shadow-2xl">
+        <div class="text-2xl">🍬</div>
         <div class="flex-1">
             <p id="noti-name" class="text-white text-sm font-bold"></p>
             <p class="text-pink-400 text-[11px] font-black">قام بطلب بوكس القلب VIP الآن ❤️</p>
         </div>
     </div>
 
-    <!-- 1. HERO SECTION -->
-    <header class="relative px-5 pt-12 pb-20 text-center z-10">
-        <div class="inline-flex items-center gap-2 px-5 py-2 mb-8 text-[11px] font-black tracking-[0.1em] text-pink-100 bg-pink-900/40 border border-pink-500/30 rounded-full">
-            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+    <!-- Section Héros -->
+    <header class="relative px-6 pt-12 pb-20 text-center z-10">
+        <div class="inline-flex items-center gap-2 px-5 py-2 mb-8 text-[10px] font-black tracking-widest text-pink-100 bg-pink-900/40 border border-pink-500/30 rounded-full uppercase">
             SWEET GUMMY CO. | ORIGINAL BRAND 🇩🇿
         </div>
+        <h1 class="text-5xl md:text-7xl font-candy leading-[1.2] mb-6 drop-shadow-2xl text-white">تذوق سحر<br><span class="text-pink-500 underline underline-offset-8 decoration-pink-500/30">الحلوى الفاخرة</span></h1>
         
-        <h1 class="text-5xl md:text-7xl font-candy leading-[1.2] mb-6 tracking-tight drop-shadow-2xl">
-            أرواح تذوق أحسن<br><span class="text-pink-500 underline decoration-pink-500/30 underline-offset-8">حلوى مستوردة!</span>
-        </h1>
-        
-        <p class="text-gray-400 text-lg font-bold mb-12 max-w-xl mx-auto leading-relaxed px-2">
-            أكبر تشكيلة من الـ Gummies الحامضة والطرية في الجزائر. ألوان تفتح الشهية وبنة خيالية!
-        </p>
-
-        <!-- Main Product Image -->
-        <div class="relative max-w-md mx-auto mb-16 px-2">
-            <div class="rounded-[40px] p-1.5 bg-gradient-to-br from-pink-500 via-purple-600 to-yellow-500 shadow-[0_25px_60px_rgba(255,20,147,0.3)]">
-                <img src="hero.jpg.jpg" alt="Candy Collection" class="w-full h-80 object-cover rounded-[36px]" onerror="https://i.postimg.cc/FKKrKrCt/hero-jpg.webp">
+        <div class="relative max-w-md mx-auto mb-16 px-2 reveal">
+            <div class="rounded-[40px] p-1.5 bg-gradient-to-br from-pink-500 via-purple-600 to-yellow-400 shadow-2xl">
+                <!-- Utilisation du fichier hero.jpg.jpg mentionné -->
+                <img src="hero.jpg.jpg" alt="Collection de Bonbons" class="w-full h-80 object-cover rounded-[36px]" onerror="https://i.postimg.cc/T13q7Wtx/hero-jpg.jpg">
             </div>
-            
-            <!-- Scarcity Trigger -->
             <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[90%] bg-gray-900 rounded-2xl p-4 border border-gray-700 shadow-2xl">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-xs font-black text-red-400 flex items-center gap-1">🔥 طلب كبير جداً!</span>
-                    <span class="text-xs font-bold text-gray-300">باقي <span class="text-white">9</span> قطع فقط</span>
+                <div class="flex justify-between items-center text-[11px] mb-2 font-bold">
+                    <span class="text-red-500 animate-pulse">● طلبات مكثفة الآن!</span>
+                    <span class="text-gray-400">باقي 9 قطع فقط</span>
                 </div>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="w-[91%] h-full bg-pink-600 rounded-full"></div></div>
             </div>
         </div>
         
-        <button onclick="scrollToCheckout()" class="w-full max-w-sm btn-buy text-white font-candy text-3xl py-6 rounded-3xl mt-4">أطلب الآن 🛒</button>
+        <button onclick="scrollToCheckout()" class="w-full max-w-sm btn-buy text-white font-candy text-3xl py-6 rounded-3xl mt-6">أطلب الآن 🛒</button>
     </header>
 
-    <!-- 2. OFFERS SECTION (THE HOOK) -->
-    <section class="px-5 py-20 bg-black/40 border-y border-white/5 relative">
-        <h2 class="text-4xl font-candy text-center mb-16">عروضنا الرهيبة 😋</h2>
+    <!-- Section Offres (Ordonnées de 1 à 3) -->
+    <section class="px-5 py-20 bg-white/5 border-y border-white/5 relative">
+        <h2 class="text-4xl font-candy text-center mb-16 text-white">عروضنا الرهيبة 😋</h2>
         
-        <div class="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
-            
-            <!-- Offer 1 (Trial) -->
+        <div class="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto items-stretch">
+            <!-- Offre 1 -->
             <div class="display-card reveal" onclick="selectAndScroll('1900')">
                 <div class="offer-img-wrapper">
-                    <img src="offer1.jpg.jpg" alt="Basic Offer" onerror="https://i.postimg.cc/xCC296Cg/offer1-jpg.jpg">
+                    <img src="offer1.jpg.jpg" alt="1 Jar" onerror="this.src='https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=600&q=80'">
                 </div>
                 <div class="p-6 text-center flex-1 flex flex-col justify-between">
                     <div>
                         <h3 class="text-2xl font-candy mb-2 text-white">بوكس التجربة</h3>
-                        <p class="text-xs text-gray-500 font-bold mb-6 bg-gray-800/40 p-2 rounded-xl">علبة شفافة صغيرة مخصصة للتذوق فقط.</p>
+                        <p class="text-[11px] text-gray-500 font-bold mb-6">علبة واحدة للتذوق فقط. (حجم صغير)</p>
                     </div>
                     <div class="text-3xl font-candy text-gray-400">1900 دج</div>
                 </div>
             </div>
 
-            <!-- Offer 3 (VIP - CENTERED & MOST ATTRACTIVE) -->
-            <div class="display-card active-vip md:-translate-y-4 reveal" onclick="selectAndScroll('4500')">
-                <div class="vip-badge">🏆 العرض الملكي الفاخر</div>
-                <div class="offer-img-wrapper h-[240px]">
-                    <img src="offer3.jpg.jpg" alt="VIP Heart Offer" onerror="this.src='https://i.postimg.cc/CKd0gvdC/offer3-jpg.jpg">
-                </div>
-                <div class="p-6 text-center flex-1 flex flex-col justify-between bg-yellow-500/5">
-                    <div>
-                        <h3 class="text-3xl font-candy mb-2 text-yellow-500">بوكس القلب العملاق ❤️</h3>
-                        <p class="text-sm text-yellow-600 font-black mb-6 leading-relaxed bg-yellow-500/10 p-3 rounded-2xl">كمية ضخمة جداً في علبة فخمة + صوص الحموضة العجيبة هدية مجانية 🎁</p>
-                    </div>
-                    <div class="text-4xl font-candy text-yellow-500 drop-shadow-md">4500 دج</div>
-                </div>
-            </div>
-
-            <!-- Offer 2 (Double) -->
+            <!-- Offre 2 -->
             <div class="display-card reveal" onclick="selectAndScroll('2900')">
                 <div class="offer-img-wrapper">
-                    <img src="offer2.jpg.jpg" alt="Double Offer" onerror="https://i.postimg.cc/MH02DN35/offer2-jpg.jpg">
+                    <img src="offer2.jpg.jpg" alt="2 Jars" onerror="this.src='https://images.unsplash.com/photo-1579619586178-5777dfdbac79?auto=format&fit=crop&w=600&q=80'">
                 </div>
-                <div class="p-6 text-center flex-1 flex flex-col justify-between">
+                <div class="p-6 text-center flex-1 flex flex-col justify-between relative">
+                    <div class="absolute top-2 right-2 bg-pink-600 text-white text-[10px] font-black px-3 py-1 rounded-lg">توفير 900 دج!</div>
                     <div>
                         <h3 class="text-2xl font-candy mb-2 text-white">العرض المزدوج</h3>
-                        <p class="text-xs text-gray-500 font-bold mb-6 bg-gray-800/40 p-2 rounded-xl">زوج علب شفافة (بوكس ليك وبوكس لحبابك) - توفير 900 دج.</p>
+                        <p class="text-[11px] text-gray-500 font-bold mb-6">زوج علب شفافة ممتلئة بالبنة.</p>
                     </div>
                     <div class="text-3xl font-candy text-pink-400">2900 دج</div>
                 </div>
             </div>
 
+            <!-- Offre 3 (VIP - Ordonnée en 3ème et Highlightée) -->
+            <div class="display-card vip-highlight reveal" onclick="selectAndScroll('4500')">
+                <div class="vip-badge-float">الأكثر طلباً 👑</div>
+                <div class="offer-img-wrapper h-[240px]">
+                    <img src="offer3.jpg.jpg" alt="Heart Box" onerror="this.src='https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&w=600&q=80'">
+                </div>
+                <div class="p-8 text-center flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-candy mb-3 text-yellow-500">بوكس القلب VIP ❤️</h3>
+                        <p class="text-sm text-yellow-600 font-black mb-6 leading-relaxed bg-yellow-500/10 p-3 rounded-xl">كمية ضخمة جداً + صوص الحموضة مجاناً 🎁</p>
+                    </div>
+                    <div class="text-4xl font-candy text-yellow-500 drop-shadow-md">4500 دج</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- 3. CHECKOUT FORM (THE CONVERSION) -->
+    <!-- Section Paiement -->
     <section id="checkout-section" class="px-5 py-24">
-        <div class="max-w-2xl mx-auto glass-card p-6 md:p-10 border-t-8 border-pink-500 reveal">
-            <div class="text-center mb-10">
+        <div class="max-w-3xl mx-auto glass-card p-6 md:p-12 border-t-8 border-pink-500 reveal">
+            <div class="text-center mb-12">
                 <h2 class="text-4xl font-candy mb-2 text-white">أكمل طلبك الآن 🚚</h2>
-                <p class="text-pink-300 font-bold text-sm bg-pink-900/30 inline-block px-4 py-1.5 rounded-full">التوصيل لـ 58 ولاية | الدفع عند الاستلام</p>
+                <p class="text-pink-300 font-bold text-xs bg-pink-900/40 inline-block px-5 py-2 rounded-full border border-pink-500/20 shadow-inner">التوصيل لـ 58 ولاية | الدفع عند الاستلام</p>
             </div>
             
-            <form id="orderForm" class="space-y-6">
-                <!-- Data for Google Sheets -->
+            <form id="orderForm" class="space-y-8">
+                <!-- Champs cachés pour le suivi Google Sheets -->
                 <input type="hidden" name="product" id="hidden-product">
                 <input type="hidden" name="price" id="hidden-price">
 
-                <!-- 1. Offer Selection (Mandatory) -->
-                <div id="selection-container" class="mb-10">
-                    <label class="block text-lg font-candy mb-4 text-white">1. اختر العرض الخاص بك (إجباري):</label>
+                <!-- 1. Sélection de l'offre -->
+                <div id="selection-container" class="space-y-4">
+                    <label class="block text-xl font-candy mb-2 text-white">1. اختر العرض المناسب لك:</label>
                     
-                    <label class="radio-offer vip">
-                        <input type="radio" name="offer" value="4500" data-name="بوكس القلب VIP + صوص" onchange="updateTotal(this)">
+                    <label class="radio-offer">
+                        <input type="radio" name="offer_id" value="1900" data-name="بوكس التجربة (1900)" required onchange="updateUI(this)">
                         <div class="radio-box">
-                            <div class="flex items-center">
-                                <div class="radio-circle"></div>
-                                <span class="font-bold text-yellow-500">بوكس القلب الفاخر + صوص مجاني</span>
-                            </div>
-                            <span class="font-candy text-xl">4500 دج</span>
+                            <div class="flex items-center"><div class="radio-circle"></div><span class="font-bold text-gray-300">بوكس التجربة (علبة واحدة)</span></div>
+                            <span class="font-candy text-xl text-gray-400">1900 دج</span>
                         </div>
                     </label>
 
                     <label class="radio-offer">
-                        <input type="radio" name="offer" value="2900" data-name="العرض المزدوج (2 علب)" onchange="updateTotal(this)">
+                        <input type="radio" name="offer_id" value="2900" data-name="العرض المزدوج (2900)" required onchange="updateUI(this)">
                         <div class="radio-box">
-                            <div class="flex items-center">
-                                <div class="radio-circle"></div>
-                                <span class="font-bold text-white">العرض المزدوج (2 بوكسات)</span>
-                            </div>
+                            <div class="flex items-center"><div class="radio-circle"></div><span class="font-bold text-white">العرض المزدوج (زوج علب)</span></div>
                             <span class="font-candy text-xl text-pink-400">2900 دج</span>
                         </div>
                     </label>
 
-                    <label class="radio-offer">
-                        <input type="radio" name="offer" value="1900" data-name="بوكس التجربة الصغير" onchange="updateTotal(this)">
-                        <div class="radio-box">
-                            <div class="flex items-center">
-                                <div class="radio-circle"></div>
-                                <span class="font-bold text-gray-400">بوكس التجربة (حجم صغير)</span>
-                            </div>
-                            <span class="font-candy text-xl text-gray-400">1900 دج</span>
+                    <label class="radio-offer vip-choice">
+                        <input type="radio" name="offer_id" value="4500" data-name="بوكس القلب VIP + صوص (4500)" required onchange="updateUI(this)">
+                        <div class="radio-box border-yellow-500/30">
+                            <div class="flex items-center"><div class="radio-circle"></div><span class="font-bold text-yellow-500">بوكس القلب VIP + صوص مجاني (الأفضل)</span></div>
+                            <span class="font-candy text-xl text-yellow-400">4500 دج</span>
                         </div>
                     </label>
                 </div>
 
-                <!-- Price Summary Dashboard -->
-                <div class="bg-black/60 p-6 rounded-3xl flex justify-between items-center border border-white/5 mb-10 shadow-inner">
+                <!-- Tableau de bord des prix -->
+                <div class="bg-black/60 p-8 rounded-[30px] flex justify-between items-center border border-white/10 shadow-inner">
                     <div>
-                        <p class="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-1">الإجمالي المطلوب:</p>
-                        <div class="flex items-end gap-1">
-                            <span id="total-display" class="text-5xl font-candy leading-none tracking-tighter text-white">---</span>
-                            <span class="text-xl font-bold text-gray-500">دج</span>
-                        </div>
+                        <p class="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">المجموع الكلي للدفع:</p>
+                        <div class="flex items-end gap-1"><span id="total-display" class="text-6xl font-candy leading-none text-white">---</span><span class="text-xl font-bold text-gray-600">دج</span></div>
                     </div>
-                    <div class="text-left">
-                        <p class="text-xs font-bold text-pink-500">توصيل: <span id="delivery-display">600</span> دج</p>
-                        <p class="text-xs font-bold text-gray-400 mt-1">المنتج: <span id="product-base-price">0</span> دج</p>
+                    <div class="text-left font-bold">
+                        <p class="text-xs text-pink-500">توصيل: <span id="delivery-val">600</span> دج</p>
+                        <p class="text-[10px] text-gray-500 mt-1">المنتج: <span id="base-val">0</span> دج</p>
                     </div>
                 </div>
 
-                <!-- 2. Customer Info -->
+                <!-- 2. Informations du client -->
                 <div class="space-y-5">
-                    <label class="block text-lg font-candy mb-2 text-white border-b border-white/5 pb-2">2. معلومات التوصيل:</label>
-                    
+                    <label class="block text-xl font-candy mb-2 text-white border-b border-white/5 pb-4">2. معلومات التوصيل:</label>
                     <input type="text" name="name" required placeholder="الاسم واللقب الكامل *" class="w-full bg-black/40 border-2 border-white/10 p-5 rounded-2xl focus:border-pink-500 outline-none font-bold text-lg text-white transition-all">
                     
                     <div class="relative">
                         <input type="tel" name="phone" id="phone-input" required placeholder="رقم الهاتف (05/06/07) *" class="w-full bg-black/40 border-2 border-white/10 p-5 rounded-2xl focus:border-pink-500 outline-none font-bold text-lg text-left text-white transition-all" dir="ltr">
-                        <p id="phone-error" class="text-red-400 text-[10px] font-bold mt-2 hidden px-2">⚠️ يرجى إدخال رقم هاتف صحيح (10 أرقام تبدأ بـ 05، 06، أو 07).</p>
+                        <p id="phone-error" class="text-red-400 text-[10px] font-bold mt-2 hidden">⚠️ يرجى إدخال رقم هاتف صحيح متكون من 10 أرقام.</p>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -265,55 +258,48 @@
                     </div>
                 </div>
 
-                <!-- 3. Oath of Sincerity (Anti-Fake) -->
-                <div class="bg-red-950/20 border-2 border-red-500/30 rounded-3xl p-6 flex gap-5 items-start mt-8" id="oath-box">
+                <!-- 3. Le Serment (Anti-Fake) -->
+                <div class="bg-red-950/20 border-2 border-red-500/30 rounded-[25px] p-6 flex gap-5 items-start" id="oath-box">
                     <input type="checkbox" id="oath-check" required class="w-8 h-8 mt-1 accent-red-600 flex-shrink-0 cursor-pointer">
                     <label for="oath-check" class="text-sm font-bold text-gray-200 leading-relaxed cursor-pointer">
-                        <span class="text-red-500 font-black text-lg underline">أقسم بالله العظيم</span> أنني جاد في الشراء، وسأقوم بالرد على الهاتف واستلام الطلبية عند وصول الموصل ودفع ثمنها. (طلبك أمانة في رقبتك).
+                        <span class="text-red-500 font-black text-lg underline">أقسم بالله العظيم</span> أنني جاد في الشراء، وسأقوم بالرد على الهاتف واستلام الطلبية عند وصول الموصل ودفع ثمنها.
                     </label>
                 </div>
 
-                <!-- Submit Button -->
-                <button type="submit" id="submitBtn" class="w-full btn-buy text-white font-candy text-3xl py-6 rounded-3xl flex justify-center items-center gap-4 mt-8 shadow-2xl">
-                    <span id="btn-text">تأكيد الطلب 🚚</span>
-                    <div id="loader" class="hidden w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+                <!-- Bouton de validation -->
+                <button type="submit" id="submitBtn" class="w-full btn-buy text-white font-candy text-4xl py-7 rounded-[35px] flex justify-center items-center gap-5 shadow-2xl">
+                    <span id="btn-text">تأكيد الطلب الآن 🚚</span>
+                    <div id="loader" class="hidden w-10 h-10 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
                 </button>
-                
-                <p class="text-center text-gray-500 text-[10px] font-bold italic">🔒 معلوماتك محمية ومُشفرة 100%</p>
             </form>
 
-            <!-- Success Overlay -->
+            <!-- Message de succès -->
             <div id="success" class="hidden text-center py-20 animate-pulse">
-                <div class="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-green-500 shadow-[0_0_40px_rgba(34,197,94,0.3)]">
-                    <span class="text-6xl">✅</span>
+                <div class="w-32 h-32 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-10 border-4 border-green-500 shadow-2xl">
+                    <span class="text-7xl">✅</span>
                 </div>
-                <h3 class="text-5xl font-candy text-green-400 mb-4 tracking-wide">تم تسجيل طلبك!</h3>
-                <p class="text-xl font-bold text-gray-300 px-4">شكراً لثقتك بنا. سيتصل بك فريقنا هاتفياً خلال ساعات قليلة لتأكيد العنوان وشحن طلبيتك.</p>
+                <h3 class="text-6xl font-candy text-green-500 mb-6 tracking-wide">تم تسجيل طلبك!</h3>
+                <p class="text-2xl font-bold text-gray-300">سيتصل بك فريقنا هاتفياً خلال ساعات قليلة لتأكيد الشحن. شكراً لثقتك.</p>
             </div>
         </div>
     </section>
 
-    <!-- MOBILE STICKY FOOTER CTA -->
+    <!-- Footer Mobile Fixe -->
     <div class="fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-xl p-4 z-[999] md:hidden flex justify-between items-center border-t border-white/10 shadow-[0_-15px_40px_rgba(0,0,0,0.8)]">
         <div class="flex flex-col">
             <span id="sticky-total" class="text-white font-candy text-3xl leading-none">---</span>
-            <span class="text-pink-500 text-[10px] font-black tracking-widest">المجموع مع التوصيل 🚚</span>
+            <span class="text-pink-500 text-[10px] font-black tracking-widest mt-1">المجموع مع التوصيل 🚚</span>
         </div>
-        <button onclick="scrollToCheckout()" class="btn-buy px-10 py-3.5 rounded-2xl font-candy text-2xl text-white">أطلب الآن</button>
+        <button onclick="scrollToCheckout()" class="btn-buy px-10 py-3 rounded-2xl font-candy text-2xl text-white">أطلب الآن</button>
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- SCRIPTS LOGIQUES -->
     <script>
-        // 1. Reveal Elements on Scroll
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, observerOptions);
+        // Animation d'apparition au défilement
+        const observer = new IntersectionObserver((e) => e.forEach(entry => entry.isIntersecting && entry.target.classList.add('active')), { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // 2. Wilayas Array & Saharan Logic
+        // Liste des Wilayas et Logique Saharienne
         const saharanWilayas = ["01", "08", "11", "30", "32", "33", "37", "39", "45", "47", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58"];
         const wilayasList = ["01-أدرار","02-الشلف","03-الأغواط","04-أم البواقي","05-باتنة","06-بجاية","07-بسكرة","08-بشار","09-البليدة","10-البويرة","11-تمنراست","12-تبسة","13-تلمسان","14-تيارت","15-تيزي وزو","16-الجزائر","17-الجلفة","18-جيجل","19-سطيف","20-سعيدة","21-سكيكدة","22-سيدي بلعباس","23-عنابة","24-قالمة","25-قسنطينة","26-المدية","27-مستغانم","28-المسيلة","29-معسكر","30-ورقلة","31-وهران","32-البيض","33-إليزي","34-برج بوعريريج","35-بومرداس","36-الطارف","37-تندوف","38-تيسمسيلت","39-الوادي","40-خنشلة","41-سوق أهراس","42-تيبازة","43-ميلة","44-عين الدفلى","45-النعامة","46-عين تموشنت","47-غرداية","48-غليزان","49-تيميمون","50-برج باجي مختار","51-أولاد جلال","52-بني عباس","53-عين صالح","54-عين قزام","55-تقرت","56-جانت","57-المغير","58-المنيعة"];
         
@@ -323,90 +309,80 @@
         let price = 0, delivery = 600;
 
         wSelect.onchange = (e) => {
-            const code = e.target.value.substring(0, 2);
+            const code = e.target.value.split("-")[0];
             delivery = saharanWilayas.includes(code) ? 750 : 600;
-            document.getElementById('delivery-display').innerText = delivery;
-            updateUI();
+            document.getElementById('delivery-val').innerText = delivery;
+            refreshUI();
         };
 
         function scrollToCheckout() { document.getElementById('checkout-section').scrollIntoView({ behavior: 'smooth' }); }
 
         function selectAndScroll(val) {
-            const rb = document.querySelector(`input[name="offer"][value="${val}"]`);
-            if(rb) { rb.checked = true; updateTotal(rb); }
+            const rb = document.querySelector(`input[name="offer_id"][value="${val}"]`);
+            if(rb) { rb.checked = true; updateUI(rb); }
             scrollToCheckout();
         }
 
-        function updateTotal(rb) {
+        function updateUI(rb) {
             price = parseInt(rb.value);
             document.getElementById('hidden-product').value = rb.dataset.name;
-            document.getElementById('hidden-price').value = price + " دج";
+            document.getElementById('hidden-price').value = price + " DA";
             document.getElementById('selection-container').classList.remove('shake-error');
-            document.getElementById('product-base-price').innerText = price;
-            updateUI();
+            document.getElementById('base-val').innerText = price;
+            refreshUI();
         }
 
-        function updateUI() {
+        function refreshUI() {
             if(price === 0) return;
             const total = price + delivery;
             document.getElementById('total-display').innerText = total;
             document.getElementById('sticky-total').innerText = total + " دج";
         }
 
-        // 3. Form Submission Logic
+        // Envoi du formulaire vers Google Apps Script
         const form = document.getElementById('orderForm');
         form.onsubmit = async (e) => {
             e.preventDefault();
-            
-            // Validation 1: Offer Selection
-            if(price === 0) {
-                document.getElementById('selection-container').classList.add('shake-error');
-                scrollToCheckout();
-                return;
-            }
-
-            // Validation 2: Algerian Phone Regex
+            if(price === 0) { document.getElementById('selection-container').classList.add('shake-error'); return; }
             const phone = document.getElementById('phone-input').value.replace(/\s/g, '');
-            if(!/^0[567][0-9]{8}$/.test(phone)) {
+            if(!/^0[567][0-9]{8}$/.test(phone)) { 
                 document.getElementById('phone-input').classList.add('shake-error');
                 document.getElementById('phone-error').classList.remove('hidden');
-                return;
-            } else {
-                document.getElementById('phone-error').classList.add('hidden');
+                return; 
             }
-
-            // Start Loading
-            document.getElementById('btn-text').innerText = 'جاري إرسال طلبك...';
+            
+            document.getElementById('btn-text').innerText = 'جاري الإرسال...';
             document.getElementById('loader').classList.remove('hidden');
             document.getElementById('submitBtn').disabled = true;
 
-            // CHANGE THIS TO YOUR GOOGLE SCRIPT URL
-            const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
-            
             try {
-                await fetch(scriptURL, { method: 'POST', body: new FormData(form)});
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbwBBFuHmwCbK5S1R4wrg9j2Memsi5XtHXmy6ETXFGFkmnBBlTTmGcHskyhYPH2vX4V3hw/exec';
+                const response = await fetch(scriptURL, { method: 'POST', body: new FormData(form) });
+                
+                // Suivi des conversions Pixels
+                if(typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: price, currency: 'DZD' });
+                if(typeof ttq !== 'undefined') ttq.track('CompletePayment', { value: price, currency: 'DZD' });
+                
                 form.classList.add('hidden');
                 document.getElementById('success').classList.remove('hidden');
-                window.scrollTo({ top: document.getElementById('checkout-section').offsetTop - 50, behavior: 'smooth' });
             } catch (err) {
-                alert('حدث خطأ في الاتصال، يرجى المحاولة مرة أخرى.');
+                alert('خطأ في الاتصال، يرجى المحاولة مرة أخرى.');
                 document.getElementById('submitBtn').disabled = false;
                 document.getElementById('loader').classList.add('hidden');
                 document.getElementById('btn-text').innerText = 'تأكيد الطلب الآن 🚚';
             }
         };
 
-        // 4. Dynamic Notifications
-        const dummyNames = ["أمين من البليدة", "خديجة من العاصمة", "مراد من سطيف", "ياسين من وهران", "مريم من قسنطينة", "يوسف من باتنة", "صارة من عنابة", "حميد من مستغانم"];
-        function showNotification() {
-            document.getElementById('noti-name').innerText = dummyNames[Math.floor(Math.random()*dummyNames.length)];
-            const el = document.getElementById('push-noti');
+        // Notifications fictives pour preuve sociale
+        const names = ["كمال من البليدة", "خديجة من العاصمة", "مراد من سطيف", "ياسين من وهران", "مريم من قسنطينة", "يوسف من باتنة", "صارة من عنابة"];
+        function showNoti() {
+            document.getElementById('noti-name').innerText = names[Math.floor(Math.random()*names.length)];
+            const el = document.getElementById('push-noti'); 
             el.classList.add('show');
             setTimeout(() => el.classList.remove('show'), 6000);
         }
-        setInterval(showNotification, 18000);
-        setTimeout(showNotification, 5000);
+        setInterval(showNoti, 18000); 
+        setTimeout(showNoti, 4000);
     </script>
-
 </body>
 </html>
