@@ -132,7 +132,7 @@
         <button onclick="scrollToCheckout()" class="w-full max-w-sm btn-buy text-white font-candy text-3xl py-7 rounded-[35px] mt-6">أطلب البوكس تاعك 🛒</button>
     </header>
 
-    <!-- 2. Offers Section (Marketing Copy Updated) -->
+    <!-- 2. Offers Section -->
     <section class="px-5 py-24 bg-white/5 border-y border-white/5 relative">
         <h2 class="text-4xl font-candy text-center mb-20 text-white">خير الهمزة لي توالمك 😋</h2>
         
@@ -166,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- Offer 3 (VIP - Most Aggressive Copy) -->
+            <!-- Offer 3 (VIP) -->
             <div class="display-card vip-highlight reveal" onclick="selectAndScroll('4500')">
                 <div class="bg-yellow-500 text-black text-[12px] font-black py-2.5 text-center tracking-widest uppercase">العرض الملكي - THE KING BOX 👑</div>
                 <div class="h-64 overflow-hidden bg-black">
@@ -287,7 +287,6 @@
                 <!-- Final Submit Button -->
                 <button type="submit" id="submitBtn" class="w-full btn-buy text-white font-candy text-4xl py-8 rounded-[40px] flex justify-center items-center gap-5 shadow-2xl mt-12">
                     <span id="btn-text">تأكيد الطلب الآن 🚚</span>
-                    <div id="loader" class="hidden w-10 h-10 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
                 </button>
             </form>
 
@@ -357,42 +356,34 @@
             document.getElementById('sticky-total').innerText = total + " دج";
         }
 
-        // Form Validation & Submission
+        // Form Validation & Submission (OPTIMISTIC UI VERSION)
         const form = document.getElementById('orderForm');
-        form.onsubmit = async (e) => {
+        form.onsubmit = (e) => {
             e.preventDefault();
             let hasError = false;
 
-            // 1. Offer Selection Error
+            // Validation Checks
             if(price === 0) {
                 document.getElementById('offer-selection-area').classList.add('shake');
                 document.getElementById('offer-error').style.display = 'block';
                 hasError = true;
             }
-
-            // 2. Name Error
             if(!document.getElementById('name-input').value) {
                 document.getElementById('name-input').classList.add('shake');
                 document.getElementById('name-error').style.display = 'block';
                 hasError = true;
             }
-
-            // 3. Phone Error
-            const phone = document.getElementById('phone-input').value.replace(/\s/g, '');
-            if(!/^0[567][0-9]{8}$/.test(phone)) { 
+            const phoneVal = document.getElementById('phone-input').value.replace(/\s/g, '');
+            if(!/^0[567][0-9]{8}$/.test(phoneVal)) { 
                 document.getElementById('phone-input').classList.add('shake');
                 document.getElementById('phone-error').style.display = 'block';
                 hasError = true;
             }
-
-            // 4. Wilaya Error
             if(!wSelect.value) {
                 wSelect.classList.add('shake');
                 document.getElementById('wilaya-error').style.display = 'block';
                 hasError = true;
             }
-
-            // 5. Oath Error
             if(!document.getElementById('oath-check').checked) {
                 document.getElementById('oath-container').classList.add('shake');
                 document.getElementById('oath-error').style.display = 'block';
@@ -404,27 +395,33 @@
                 return;
             }
             
-            // Start Loading
-            document.getElementById('btn-text').innerText = 'جاري إرسال طلبك...';
-            document.getElementById('loader').classList.remove('hidden');
-            document.getElementById('submitBtn').disabled = true;
+            // --- OPTIMISTIC UI: Do everything instantly ---
+            
+            // 1. Prepare Data
+            const formData = new FormData(form);
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwBBFuHmwCbK5S1R4wrg9j2Memsi5XtHXmy6ETXFGFkmnBBlTTmGcHskyhYPH2vX4V3hw/exec';
 
-            try {
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbwBBFuHmwCbK5S1R4wrg9j2Memsi5XtHXmy6ETXFGFkmnBBlTTmGcHskyhYPH2vX4V3hw/exec';
-                await fetch(scriptURL, { method: 'POST', body: new FormData(form) });
-                
-                // Track Conversion
-                if(typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: price, currency: 'DZD' });
-                if(typeof ttq !== 'undefined') ttq.track('CompletePayment', { value: price, currency: 'DZD' });
-                
-                form.classList.add('hidden');
-                document.getElementById('success').classList.remove('hidden');
-            } catch (err) {
-                alert('خطأ في الاتصال، يرجى المحاولة مرة أخرى.');
-                document.getElementById('submitBtn').disabled = false;
-                document.getElementById('loader').classList.add('hidden');
-                document.getElementById('btn-text').innerText = 'تأكيد الطلب الآن 🚚';
+            // 2. Fire Pixels IMMEDIATELY with Advanced Matching
+            if(typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: price, currency: 'DZD' });
+            if(typeof ttq !== 'undefined') {
+                ttq.identify({ phone_number: phoneVal }); // TikTok Advanced Matching
+                ttq.track('CompletePayment', { 
+                    content_id: 'candy_box_' + price, // Required Content ID
+                    content_type: 'product',
+                    value: price, 
+                    currency: 'DZD' 
+                });
             }
+
+            // 3. Send to Google Sheets in the Background (No await, so it doesn't block the UI)
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => console.log('Data saved successfully in background'))
+                .catch(error => console.error('Background sync failed:', error));
+
+            // 4. Instantly show Success Page to the User (0ms wait)
+            form.classList.add('hidden');
+            document.getElementById('success').classList.remove('hidden');
+            window.scrollTo({ top: document.getElementById('success').offsetTop - 50, behavior: 'smooth' });
         };
 
         // Clear errors on input
